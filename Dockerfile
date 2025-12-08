@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 RUN go install github.com/bufbuild/buf/cmd/buf@v1.28.1
 
