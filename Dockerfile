@@ -13,6 +13,9 @@ COPY --from=builder /go/bin/* /usr/local/bin/
 
 RUN apk add --no-cache protobuf-dev protobuf libc6-compat
 
+# Install task runner
+RUN curl -sSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
+
 WORKDIR /workspace
 
 CMD ["sh", "-c", "echo '=== Installed tools ===' && \
