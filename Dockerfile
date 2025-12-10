@@ -1,5 +1,11 @@
 FROM golang:1.24-alpine
 
+ARG GO_PROXY_HOST
+ARG GO_PROXY_IP
+
+RUN if [ -n "$GO_PROXY_IP" ]; then \
+    echo "$GO_PROXY_IP $GO_PROXY_HOST" >> /etc/hosts; \
+    fi
 RUN apk add --no-cache git
 
 RUN go install github.com/bufbuild/buf/cmd/buf@v1.61.0

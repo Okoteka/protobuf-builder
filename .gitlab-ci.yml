@@ -9,7 +9,11 @@ build_ci_image:
   stage: infrastructure
   script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
-    - docker build -t "$IMAGE_TAG_LATEST" -t "$IMAGE_TAG_COMMIT" .
+    -|
+    docker build
+    --build-arg GO_PROXY_HOST="${GO_PROXY_HOST}"
+    --build-arg GO_PROXY_HOST_IP="${GO_PROXY_IP}"
+    -t "$IMAGE_TAG_LATEST" -t "$IMAGE_TAG_COMMIT" .
     - docker push "$IMAGE_TAG_LATEST"
     - docker push "$IMAGE_TAG_COMMIT"
   only:
