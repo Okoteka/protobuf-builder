@@ -11,7 +11,7 @@ RUN go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest
 
-RUN apk add --no-cache protobuf-dev protobuf libc6-compat
+RUN apk add --no-cache protobuf-dev protobuf libc6-compat zip curl
 
 WORKDIR /workspace
 
