@@ -14,7 +14,7 @@ build_ci_image:
       elif [ -n "$INTERNAL_CA" ]; then
         echo "$INTERNAL_CA" > internal.crt
       else
-        echo "ERROR: Required variable INFRA_CA is not defined"
+        echo "ERROR: Required variable INTERNAL_CA is not defined"
         exit 1
       fi
   script:
