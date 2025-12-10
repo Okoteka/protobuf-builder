@@ -1,12 +1,5 @@
 FROM golang:1.24-alpine
 
-ARG GO_PROXY_HOST
-ARG GO_PROXY_IP
-
-RUN if [ -n "$GO_PROXY_IP" ]; then \
-    echo "$GO_PROXY_IP $GO_PROXY_HOST" >> /etc/hosts; \
-    fi
-RUN cat /etc/hosts
 RUN apk add --no-cache git
 
 RUN go install github.com/bufbuild/buf/cmd/buf@v1.61.0
@@ -21,6 +14,10 @@ RUN go install github.com/go-task/task/v3/cmd/task@latest
 RUN apk add --no-cache protobuf-dev protobuf libc6-compat
 
 WORKDIR /workspace
+
+COPY internal.crt /usr/local/share/ca-certificates/
+
+RUN update-ca-certificates
 
 CMD ["sh", "-c", "echo '=== Installed tools ===' && \
       protoc --version && \
