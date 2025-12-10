@@ -1,4 +1,4 @@
-FROM golang:1.24-alpine AS builder
+FROM golang:1.24-alpine
 
 RUN apk add --no-cache git
 
@@ -10,10 +10,6 @@ RUN go install github.com/envoyproxy/protoc-gen-validate@v1.0.2
 RUN go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@v2.24.0
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest
-
-FROM alpine:latest
-
-COPY --from=builder /go/bin/* /usr/local/bin/
 
 RUN apk add --no-cache protobuf-dev protobuf libc6-compat
 
