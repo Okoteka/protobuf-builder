@@ -6,6 +6,7 @@ ARG GO_PROXY_IP
 RUN if [ -n "$GO_PROXY_IP" ]; then \
     echo "$GO_PROXY_IP $GO_PROXY_HOST" >> /etc/hosts; \
     fi
+RUN cat /etc/hosts
 RUN apk add --no-cache git
 
 RUN go install github.com/bufbuild/buf/cmd/buf@v1.61.0
